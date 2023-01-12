@@ -22,7 +22,7 @@ jobs:
 #         run: mkdir -p backup/history && cp -r target/allure-report/history backup/history
 
       - name: Zip
-        run: tar -cvf report.tar /target/allure-report/
+        run: tar -cvf report.tar target/allure-report
       - name: Get test tesults
         uses: actions/upload-artifact@v3
         with:
