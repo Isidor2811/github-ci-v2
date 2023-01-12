@@ -1,18 +1,28 @@
 name: Java CI
+
 on: workflow_dispatch
+
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Download and copy project to runner
       - uses: actions/checkout@v3
       - name: Set up JDK 11
         uses: actions/setup-java@v3
         with:
           java-version: '11'
           distribution: 'adopt'
-          cache: maven
-      - name: Build with Maven
+          cache: maven #cache maven dependencies
+      - name: Run tests
         run: mvn clean test -Dsuite=regression.xml
-      - name: Generate report
+      - name: Generate allure report
         run: mvn allure::report
+#       - name: Save allure history
+#         run: mkdir -p backup/history && cp -r target/allure-report/history backup/history
+      - name: Get test tesults
+        uses: actions/upload-artifact@v3
+        with:
+          name: allure report
+          path: target/allure-report
