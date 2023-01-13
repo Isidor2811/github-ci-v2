@@ -32,10 +32,4 @@ jobs:
         env:
           PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PUBLISH_BRANCH: gh-pages
-          PUBLISH_DIR: allure-report
-        
-#       - name: Get test tesults
-#         uses: actions/upload-artifact@v3
-#         with:
-#           name: allure report
-#           path: report.tar
+          PUBLISH_DIR: .target/allure-report
