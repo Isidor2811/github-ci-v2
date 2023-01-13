@@ -31,7 +31,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: target/allure-report/index.html
-          public_branch: gh-pages
+          publish_branch: gh-pages
         
 #       - name: Get test tesults
 #         uses: actions/upload-artifact@v3
