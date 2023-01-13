@@ -5,7 +5,6 @@ on: workflow_dispatch
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK 11
@@ -14,13 +13,16 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
           cache: maven #cache maven dependencies
+          
       - name: Run tests
-        run: mvn clean test -Dsuite=regression.xml
+        run: mvn clean test -Dsuite=regression.xml -P stage
+        
       - name: Generate allure report
         run: mvn allure::report
 
       - name: Zip
         run: tar -cvf report.tar target
+        
       - name: Get test tesults
         uses: actions/upload-artifact@v3
         with:
