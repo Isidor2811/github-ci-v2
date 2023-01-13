@@ -18,11 +18,9 @@ jobs:
         run: mvn clean test -Dsuite=regression.xml
       - name: Generate allure report
         run: mvn allure::report
-#       - name: Save allure history
-#         run: mkdir -p backup/history && cp -r target/allure-report/history backup/history
 
       - name: Zip
-        run: tar -cvf report.tar target/allure-report
+        run: tar -cvf report.tar target
       - name: Get test tesults
         uses: actions/upload-artifact@v3
         with:
