@@ -15,7 +15,40 @@
     <allure.integration.version>2.20.1</allure.integration.version>
   </properties>
 
+  <profiles>
+    <profile>
+      <id>dev</id>
+      <properties>
+        <config.file>src/main/resources/env/dev.properties</config.file>
+      </properties>
+    </profile>
+    <profile>
+      <id>stage</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <config.file>src/main/resources/env/stage.properties</config.file>
+      </properties>
+    </profile>
+  </profiles>
+
   <build>
+
+    <filters>
+      <filter>${config.file}</filter>
+    </filters>
+
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+        <includes>
+          <include>*.properties</include>
+        </includes>
+      </resource>
+    </resources>
+
     <pluginManagement>
       <plugins>
 
