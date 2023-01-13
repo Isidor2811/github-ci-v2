@@ -16,8 +16,8 @@ jobs:
 
       - name: Get valid properties
         env:
-          env_config: ${{ secrets.STAGE_CI_CONFIG }}
-        run: echo $env_config >> $(pwd)/src/main/resources/config.properties && cat $(pwd)/src/main/resources/config.properties
+          ENV_CONFIG: ${{ secrets.STAGE_CI_CONFIG }}
+        run: echo $ENV_CONFIG > $(pwd)/src/main/resources/config.properties
         
       - name: Run tests
         run: mvn clean test -Dsuite=regression.xml -P stage
