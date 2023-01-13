@@ -1,5 +1,5 @@
 target
 .allure
 .idea
-#src/main/resources/env/dev.properties
-#src/main/resources/env/stage.properties
+src/main/resources/env/dev.properties
+src/main/resources/env/stage.properties
