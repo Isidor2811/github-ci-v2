@@ -1,4 +1,4 @@
-name: Java CI
+name: ATQC automation tests
 
 on: workflow_dispatch
 
@@ -12,8 +12,9 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
-          cache: maven #cache maven dependencies
+          cache: maven
 
+        # Here we should select property file (STAGE_CI_CONFIG or DEV_CI_CONFIG) depends on profile      
       - name: Get valid properties
         env:
           ENV_CONFIG: ${{ secrets.STAGE_CI_CONFIG }}
@@ -24,12 +25,15 @@ jobs:
       
       - name: Generate allure report
         run: mvn allure::report
-
-      - name: Zip
-        run: tar -cvf report.tar target
-        
-      - name: Get test tesults
-        uses: actions/upload-artifact@v3
+      
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          name: allure report
-          path: report.tar
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: .target/allure-report/index.html
+        
+#       - name: Get test tesults
+#         uses: actions/upload-artifact@v3
+#         with:
+#           name: allure report
+#           path: report.tar
