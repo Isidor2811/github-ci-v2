@@ -13,6 +13,9 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
           cache: maven #cache maven dependencies
+          
+      - name: logs
+        run: echo $STAGE_CI_CONFIG
       - name: Get valid properties
         run: echo $STAGE_CI_CONFIG >> $(pwd)/src/main/resources/config.properties && cat $(pwd)/src/main/resources/config.properties
         
