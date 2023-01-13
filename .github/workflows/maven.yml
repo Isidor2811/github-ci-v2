@@ -14,7 +14,7 @@ jobs:
           distribution: 'adopt'
           cache: maven #cache maven dependencies
       - name: Get valid properties
-        run: echo $STAGE_CI_CONFIG >> $(pwd)/src/main/resources/config.properties
+        run: echo $STAGE_CI_CONFIG >> $(pwd)/src/main/resources/config.properties && cat $(pwd)/src/main/resources/config.properties
         
       - name: Run tests
         run: mvn clean test -Dsuite=regression.xml -P stage
