@@ -25,16 +25,22 @@ jobs:
       
       - name: Generate allure report
         run: mvn allure::report
-      
-#       - name: Deploy report to Github Pages
-#         if: always()
-#         uses: peaceiris/actions-gh-pages@v2
-#         env:
-#           PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#           PUBLISH_BRANCH: gh-pages
-#           PUBLISH_DIR: .target/allure-report
 
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@v4
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Pages
+        uses: actions/configure-pages@v2
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
         with:
-          folder: target # The folder the action should deploy.
+          # Upload entire repository
+          path: '.'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
