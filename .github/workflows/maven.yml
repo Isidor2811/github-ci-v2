@@ -48,3 +48,4 @@ jobs:
         env:
             SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
             SLACK_TITLE: ATQC test report
+            SLACK_MESSAGE: https://isidor2811.github.io/github-ci-v2/
